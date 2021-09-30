@@ -1,0 +1,12 @@
+{
+    "image_name": "tensorflow",
+    "image_description": "A working tensorflow GPU image",
+    "image_hardware_type": "GPU",
+    "image_language": "python",
+    "version_name": "v4",
+    "version_description": "now includes keras",
+    "version_build_data": {
+        "base_image_uri": "saturncloud/saturnbase:2021.08.16-2",
+        "pip_requirements": "tensorflow=2.6.0"
+    }
+}
