@@ -1,0 +1,45 @@
+{
+  "name": "demo",
+  "description": "A demonstration of the saturn.json schema",
+  "image_name": "jnolis/tensorflow:v4",
+  "extra_packages": {
+    "conda": ["tensorflow==2.6.0","papermill"]
+  },
+  "start_script": "pip install torch",
+  "jupyter_server": {
+    "instance": "xlarge",
+    "use_ssh": true,
+    "disk_space": "10gb",
+    "auto_shutoff": "1 hour"
+  },
+  "dask_cluster": {
+    "scheduler_instance_type": "xlarge",
+    "worker_instance_type": "xlarge",
+    "num_workers": 3
+  },
+  "environment_variables": {
+    "VAR1": "VALUE1",
+    "VAR2": "VALUE2"
+  },
+  "git_repositories": [
+   {"url": "git@github.com:tmobile/r-tensorflow-api.git"},
+   {"url": "git@github.com:jnolis/pet-names.git",
+    "reclone_on_restart": false,
+    "reference_type": "branch",
+    "reference": "dev"}
+  ],
+  "credentials": [
+    {"name": "snowflake_key",
+     "type": "file",
+     "location": "/snowflake.txt"},
+    {"name": "snowflake_password",
+     "type": "environment_variable",
+     "location": "SNOWFLAKE_PASSWORD"}
+  ],
+  "template": {
+    "thumbnail_url": "https://saturn-public-assets.s3.us-east-2.amazonaws.com/example-thumbnails/saturn.png",
+    "weight": 50,
+    "title": "Example Jupyter",
+    "description": "Just toying around with Jupyter"
+  }
+}

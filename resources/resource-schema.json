@@ -1,0 +1,282 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resource",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the resource. This will likely be overwritten by the owner.",
+      "pattern": "^[-a-zA-Z0-9]+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Details about the resource, to help distinguish them"
+    },
+    "image_name": {
+      "type": "string",
+      "description": "The name image to use with the resource. The image with correct owner and version must exist in the particular Saturn Cloud deployment for the resource to work (either Hosted or a particular Enterprise installation). Must include exactly one of image_name or image_uri",
+      "pattern": "^[-a-zA-Z0-9]+/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$"
+    },
+    "image_uri": {
+      "type": "string",
+      "description": "[FUTURE RELEASE], rather than giving the image owner/name/version, you can alternatively specify the URI of the image."
+    },
+    "working_directory": {
+      "type": "string",
+      "description": "Location to use to run commands. Default may depend on resource type"
+    },
+    "extra_packages": {
+      "type": "object",
+      "description": "extra packages to install. Not all of these may exist depending on the resource type and if they are needed",
+      "properties": {
+        "conda": {
+          "type": "array",
+          "description": "Packages to install from conda",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pip": {
+          "type": "array",
+          "description": "Packages to install from pip",
+          "items": {
+            "type": "string"
+          }
+        },
+        "apt": {
+          "type": "array",
+          "description": "Packages to install from apt",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cran": {
+          "type": "array",
+          "description": "Packages to install from CRAN (RStudio Workbench only)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "github": {
+          "type": "array",
+          "description": "Packages to install from GitHub (RStudio Workbench only)",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "start_script": {
+      "type": "string",
+      "description": "The start script to run. Note that instead of using this parameter in the file, a separate saturnstart.sh script can be passed with this config to include a longer installation"
+    },
+    "dask_cluster": {
+      "type": "object",
+      "description": "details about the attached Dask cluster. If this `dask` object is in the json file then a Dask cluster will be included with the resource",
+      "properties": {
+        "scheduler_instance_type": { "$ref": "#/$defs/instance_type" },
+        "worker_instance_type": { "$ref": "#/$defs/instance_type" },
+        "use_spot_instances": {
+          "type": "boolean",
+          "description": "Whether or not the Dask cluster should use spot instances",
+          "default": false
+        },
+        "num_workers": {
+          "type": "integer",
+          "description": "The number of worker machines in the Dask cluster",
+          "minimum": 1
+        },
+        "num_worker_processes": {
+          "type": "integer",
+          "description": "The number of worker processes. If not specified, this defaults to either 1 on CPU workers or the number of GPUs on GPU workers",
+          "minimum": 1
+        },
+        "num_worker_threads": {
+          "type": "integer",
+          "description": "The number of worker threads. If not specified this optimally chosen by Saturn Cloud",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "scheduler_instance_type",
+        "worker_instance_type",
+        "num_workers"
+      ]
+    },
+    "jupyter_server": {
+      "instance_type": { "$ref": "#/$defs/instance_type" },
+      "allow_ssh": { "$ref": "#/$defs/allow_ssh" },
+      "disk_space": { "$ref": "#/$defs/disk_space" },
+      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+    },
+    "rstudio_workbench": {
+      "instance_type": { "$ref": "#/$defs/instance_type" },
+      "allow_ssh": { "$ref": "#/$defs/allow_ssh" },
+      "disk_space": { "$ref": "#/$defs/disk_space" },
+      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+    },
+    "job": {
+      "command": { "$ref": "#/$defs/command" },
+      "schedule": { "$ref": "#/$defs/schedule" }
+    },
+    "deployment": {
+      "command": { "$ref": "#/$defs/command" },
+      "schedule": { "$ref": "#/$defs/schedule" }
+    },
+    "environment_variables": {
+      "type": "object",
+      "description": "Environmental variables to include with the object. Each key-value pair must be the name of the variable and the value (both strings)",
+      "additionalProperties": {"type": "string"}
+    },
+    "git_repositories": {
+      "type": "array",
+      "description": "List of git repos to include with the resource",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "the URL of the git repo to use with the resource"
+            },
+            "reclone_on_restart": {
+              "type": "boolean",
+              "description": "Whether the git repo should be recloned every time the resource is restarted. For job and deployment resources, this must be true (defaults to false for jupyter_server and rstudio_workbench resources)"
+            },
+            "reference": {
+              "type": "object",
+              "properties": {
+                "reference_type": {
+                  "type": "string",
+                  "description": "If the git repo is recloning on restart, what type of reference to use when cloning (a commit, a branch, or a tag)",
+                  "enum": [
+                    "commit",
+                    "branch",
+                    "tag"
+                  ]
+                },
+                "value": {
+                  "type": "string",
+                  "description": "The actual value of the reference (i.e. the particular name of the commit, branch, or tag)"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ]
+            }
+          },
+          "required": [
+            "url"
+          ]
+        }
+      ]
+    },
+    "credentials": {
+      "type": "array",
+      "description": "list of the secret credentials that the resource requires. These are not the actual credentials themselves, just references to what the user needs.",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the credential so the user knows what to include"
+            },
+            "type": {
+              "type": "string",
+              "description": "specify whether it is an environment variable or a file",
+              "enum": ["environment_variable","file"]
+            },
+            "location": {
+              "type": "string",
+              "description": "for an environment_variable, the name of the variable. For a file, the path to the file on the system"
+            }
+          },
+          "required": [
+            "name",
+            "type",
+            "location"
+          ]
+        }
+      ]
+    },
+    "template": {
+      "type": "object",
+      "description": "Adding this object lets Saturn Cloud know this is to be used as a template. If this resource is to be used as a template, additional details are required",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title to use when displaying the template resource in the UI"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description to use when displaying the template resource in the UI"
+        },
+        "thumbnail_url": {
+          "type": "string",
+          "description": "A URL for the image to use as the thumbnail of the template. This URL must remain live and public (the image is not transferred to Saturn Cloud servers)"
+        },
+        "weight": {
+          "type": "integer",
+          "description": "How to order the template in a list of them"
+        }
+      },
+      "required": [
+        "thumbnail_url",
+        "weight",
+        "title",
+        "description"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "description"
+  ],
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["image_name"]
+    },
+    {
+      "type": "object",
+      "required": ["image_uri"]
+    }
+  ],
+  "anyOf": [
+    {"required": ["jupyter_server"]},
+    {"required": ["rstudio_workbench"]},
+    {"required": ["job"]},
+    {"required": ["deployment"]}
+  ],
+  "$defs": {
+    "instance_type": {
+      "type": "string",
+      "description": "The instance size to deploy on. Must be a name from http://saturncloud.io/static/constants.yaml"
+    },
+    "allow_ssh": {
+      "type": "boolean",
+      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server and rstudio_workbench)",
+      "default": false
+    },
+    "disk_space": {
+      "type": "string",
+      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
+      "default": "10gb"
+    },
+    "auto_shutoff": {
+      "type": "string",
+      "description": "The amount of time before the server shuts off. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
+      "default": "1 hour"
+    },
+    "schedule": {
+      "type": "string",
+      "description": "If included, a job will run on this Kubernetes CRON schedule. If is a job and not included, job will run on command only (Resource types: job only)"
+    },
+    "command": {
+      "type": "string",
+      "description": "Command used to run job/deployment. (Resource types: job and deployment)"
+    }
+  }
+}
