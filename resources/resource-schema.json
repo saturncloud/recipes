@@ -143,11 +143,11 @@
             },
             "private": {
               "type": "boolean",
-              "description": "Whether git repository is private (defaults to false)."
+              "description": "Whether git repository is private (defaults to false). If the repository is not private then Saturn Cloud resource will connect without requiring the Saturn Cloud user has git credentials"
             },
             "read_only": {
               "type": "boolean",
-              "description": "Whether to allow pushes to the git repo (defaults to true). Note: if the git repo is read-only then it will be recloned on restart."
+              "description": "Whether to allow pushes to the git repo (defaults to true). Note: if the git repo is read-only then it will be recloned on restart, but allowing pushes requires the Saturn Cloud user has git credentials."
             },
             "reference_type": {
               "type": "string",
