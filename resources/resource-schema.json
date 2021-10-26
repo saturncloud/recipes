@@ -5,12 +5,12 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Name of the resource. This will likely be overwritten by the owner.",
+      "description": "Name of the resource.",
       "pattern": "^[-a-zA-Z0-9]+$"
     },
     "description": {
       "type": "string",
-      "description": "Details about the resource, to help distinguish them"
+      "description": "Details about the resource, to help distinguish them."
     },
     "image_name": {
       "type": "string",
@@ -23,7 +23,8 @@
     },
     "working_directory": {
       "type": "string",
-      "description": "Location to use to run commands. Default may depend on resource type"
+      "description": "Location to use to run commands.",
+      "default": "/home/jovyan/git-repos"
     },
     "extra_packages": {
       "type": "object",
@@ -48,17 +49,22 @@
         "github": {
           "type": "string",
           "description": "[FUTURE RELEASE], Packages to install from GitHub (RStudio Workbench only)"
+        },
+        "use_mamba": {
+          "type": "boolean",
+          "description": "Whether to use mamba when installing via conda.",
+          "default": "true"
         }
       },
       "additionalProperties": false
     },
     "start_script": {
       "type": "string",
-      "description": "The start script to run. Note refer to an external script relative to the working_directory."
+      "description": "Code to run every time a server is created. Runs from the working_directory so any external script that it references should be relative to that."
     },
     "dask_cluster": {
       "type": "object",
-      "description": "details about the attached Dask cluster. If this `dask` object is in the json file then a Dask cluster will be included with the resource",
+      "description": "Details about the attached Dask cluster.",
       "properties": {
         "num_workers": {
           "type": "integer",
@@ -115,11 +121,49 @@
       "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
     },
     "job": {
-      "command": { "$ref": "#/$defs/command" },
-      "schedule": { "$ref": "#/$defs/schedule" }
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "command": { "$ref": "#/$defs/command" },
+        "schedule": { "$ref": "#/$defs/schedule" },
+        "backoff_limit": {
+          "type": "integer",
+          "description": "Number of retries before considering a Job as failed.",
+          "minimum": 1,
+          "default": 3
+        },
+        "concurrency_policy": {
+          "type": "string",
+          "description": "How to treat concurrent executions of a Job.",
+          "enum": [
+            "Allow",
+            "Forbid",
+            "Replace"
+          ],
+          "default": "Allow"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["instance_type", "command"]
     },
     "deployment": {
-      "command": { "$ref": "#/$defs/command" }
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "command": { "$ref": "#/$defs/command" },
+        "instance_count": {
+          "type": "integer",
+          "description": "How many instance to run at the same time.",
+          "default": 1
+        },
+        "public": {
+          "type": "boolean",
+          "description": "Whether to make it public and allow unauthenticated access.",
+          "default": "false"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["instance_type", "command"]
     },
     "environment_variables": {
       "type": "object",
@@ -135,19 +179,21 @@
           "properties": {
             "url": {
               "type": "string",
-              "description": "the URL of the git repo to use with the resource"
+              "description": "The URL of the git repo. HTTPS or git urls are both valid."
             },
             "location": {
               "type": "string",
               "description": "Where to clone the git repo to."
             },
-            "private": {
+            "public": {
               "type": "boolean",
-              "description": "Whether git repository is private (defaults to false). If the repository is not private then Saturn Cloud resource will connect without requiring the Saturn Cloud user has git credentials"
+              "description": "Whether git repository is public. If the repository is private then the user will need to set up git credentials.",
+              "default": "true"
             },
             "read_only": {
               "type": "boolean",
-              "description": "Whether to allow pushes to the git repo (defaults to true). Note: if the git repo is read-only then it will be recloned on restart, but allowing pushes requires the Saturn Cloud user has git credentials."
+              "description": "Whether to allow pushes to the git repo. Note: if the git repo is read-only then it will be recloned on restart, but allowing pushes requires the Saturn Cloud user has git credentials.",
+              "default": "true"
             },
             "reference_type": {
               "type": "string",
@@ -156,7 +202,8 @@
                 "commit",
                 "branch",
                 "tag"
-              ]
+              ],
+              "default": "branch"
             },
             "reference": {
               "type": "string",
@@ -199,6 +246,17 @@
           ]
         }
       ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "Name of owner. Must refer to an existing user or group within Saturn."
+    },
+    "collaborators": {
+      "type": "array",
+      "description": "Name of collaborators. Must refer to existing users or groups within Saturn.",
+      "items": [
+        {"type": "string"}
+      ]
     }
   },
   "additionalProperties": false,
@@ -235,7 +293,6 @@
     "disk_space": {
       "type": "string",
       "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
-      "default": "10gb"
     },
     "auto_shutoff": {
       "type": "string",
