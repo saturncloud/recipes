@@ -206,7 +206,7 @@
               "default": "branch"
             },
             "reference": {
-              "type": "string",
+              "type": ["string", "null"],
               "description": "The actual value of the reference (i.e. the particular name of the commit, branch, or tag)"
             }
           },
@@ -299,7 +299,7 @@
       "default": "1 hour"
     },
     "schedule": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "If included, a job will run on this Kubernetes CRON schedule. If is a job and not included, job will run on command only (Resource types: job only)"
     },
     "command": {
