@@ -292,7 +292,7 @@
     },
     "disk_space": {
       "type": "string",
-      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
+      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)"
     },
     "auto_shutoff": {
       "type": "string",
