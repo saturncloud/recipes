@@ -261,8 +261,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "name",
-    "description"
+    "name"
   ],
   "oneOf": [
     {
