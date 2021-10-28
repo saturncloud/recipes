@@ -22,7 +22,7 @@
     },
     "worker": {
       "instance_type": "xlarge"
-    },
+    }
   },
   "git_repositories": [
     {
