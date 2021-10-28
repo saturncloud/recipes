@@ -17,6 +17,7 @@
     "auto_shutoff": "1 hour"
   },
   "dask_cluster": {
+    "num_workers": 3,
     "scheduler": {
       "instance_type": "xlarge"
     },
