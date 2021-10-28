@@ -23,7 +23,6 @@
     "worker": {
       "instance_type": "xlarge"
     },
-    "num_workers": 3
   },
   "git_repositories": [
     {
