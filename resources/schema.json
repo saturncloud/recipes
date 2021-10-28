@@ -1,0 +1,310 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resource",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the resource.",
+      "pattern": "^[-a-zA-Z0-9]+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Details about the resource, to help distinguish them."
+    },
+    "image_name": {
+      "type": "string",
+      "description": "[FUTURE RELEASE], The name image to use with the resource. The image with correct owner and version must exist in the particular Saturn Cloud deployment for the resource to work (either Hosted or a particular Enterprise installation). Must include exactly one of image_name or image_uri",
+      "pattern": "^[-a-zA-Z0-9]+/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$"
+    },
+    "image_uri": {
+      "type": "string",
+      "description": "The URI of the image - image still needs to exist in saturn."
+    },
+    "working_directory": {
+      "type": "string",
+      "description": "Location to use to run commands.",
+      "default": "/home/jovyan/git-repos"
+    },
+    "extra_packages": {
+      "type": "object",
+      "description": "extra packages to install. Not all of these may exist depending on the resource type and if they are needed",
+      "properties": {
+        "conda": {
+          "type": "string",
+          "description": "Packages to install from conda"
+        },
+        "pip": {
+          "type": "string",
+          "description": "Packages to install from pip"
+        },
+        "apt": {
+          "type": "string",
+          "description": "Packages to install from apt"
+        },
+        "cran": {
+          "type": "string",
+          "description": "[FUTURE RELEASE], Packages to install from CRAN (RStudio Workbench only)"
+        },
+        "github": {
+          "type": "string",
+          "description": "[FUTURE RELEASE], Packages to install from GitHub (RStudio Workbench only)"
+        },
+        "use_mamba": {
+          "type": "boolean",
+          "description": "Whether to use mamba when installing via conda.",
+          "default": "true"
+        }
+      },
+      "additionalProperties": false
+    },
+    "start_script": {
+      "type": "string",
+      "description": "Code to run every time a server is created. Runs from the working_directory so any external script that it references should be relative to that."
+    },
+    "dask_cluster": {
+      "type": "object",
+      "description": "Details about the attached Dask cluster.",
+      "properties": {
+        "num_workers": {
+          "type": "integer",
+          "description": "The number of worker machines in the Dask cluster",
+          "minimum": 1
+        },
+        "scheduler": {
+          "instance_type": { "$ref": "#/$defs/instance_type" }
+        },
+        "worker": {
+          "type": "object",
+          "description": "Options related to the workers.",
+          "properties": {
+            "instance_type": { "$ref": "#/$defs/instance_type" },
+            "use_spot_instances": {
+              "type": "boolean",
+              "description": "Whether the Dask cluster should use spot instances",
+              "default": false
+            },
+            "num_processes": {
+              "type": "integer",
+              "description": "The number of worker processes. If not specified, this defaults to either 1 on CPU workers or the number of GPUs on GPU workers",
+              "minimum": 1
+            },
+            "num_threads": {
+              "type": "integer",
+              "description": "The number of worker threads. If not specified this optimally chosen by Saturn Cloud",
+              "minimum": 1
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "instance_type"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "scheduler",
+        "worker",
+        "num_workers"
+      ]
+    },
+    "jupyter_server": {
+      "instance_type": { "$ref": "#/$defs/instance_type" },
+      "start_ssh": { "$ref": "#/$defs/start_ssh" },
+      "disk_space": { "$ref": "#/$defs/disk_space" },
+      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+    },
+    "rstudio_workbench": {
+      "instance_type": { "$ref": "#/$defs/instance_type" },
+      "start_ssh": { "$ref": "#/$defs/start_ssh" },
+      "disk_space": { "$ref": "#/$defs/disk_space" },
+      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+    },
+    "job": {
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "command": { "$ref": "#/$defs/command" },
+        "schedule": { "$ref": "#/$defs/schedule" },
+        "backoff_limit": {
+          "type": "integer",
+          "description": "Number of retries before considering a Job as failed.",
+          "minimum": 1,
+          "default": 3
+        },
+        "concurrency_policy": {
+          "type": "string",
+          "description": "How to treat concurrent executions of a Job.",
+          "enum": [
+            "Allow",
+            "Forbid",
+            "Replace"
+          ],
+          "default": "Allow"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["instance_type", "command"]
+    },
+    "deployment": {
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "command": { "$ref": "#/$defs/command" },
+        "instance_count": {
+          "type": "integer",
+          "description": "How many instance to run at the same time.",
+          "default": 1
+        },
+        "public": {
+          "type": "boolean",
+          "description": "Whether to make it public and allow unauthenticated access.",
+          "default": "false"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["instance_type", "command"]
+    },
+    "environment_variables": {
+      "type": "object",
+      "description": "Environmental variables to include with the object. Each key-value pair must be the name of the variable and the value (both strings)",
+      "additionalProperties": {"type": "string"}
+    },
+    "git_repositories": {
+      "type": "array",
+      "description": "List of git repos to include with the resource",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The URL of the git repo. HTTPS or git urls are both valid."
+            },
+            "location": {
+              "type": "string",
+              "description": "Where to clone the git repo to."
+            },
+            "public": {
+              "type": "boolean",
+              "description": "Whether git repository is public. If the repository is private then the user will need to set up git credentials.",
+              "default": "true"
+            },
+            "read_only": {
+              "type": "boolean",
+              "description": "Whether to allow pushes to the git repo. Note: if the git repo is read-only then it will be recloned on restart, but allowing pushes requires the Saturn Cloud user has git credentials.",
+              "default": "true"
+            },
+            "reference_type": {
+              "type": "string",
+              "description": "What type of reference to use when cloning (a commit, a branch, or a tag)",
+              "enum": [
+                "commit",
+                "branch",
+                "tag"
+              ],
+              "default": "branch"
+            },
+            "reference": {
+              "type": ["string", "null"],
+              "description": "The actual value of the reference (i.e. the particular name of the commit, branch, or tag)"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "url"
+          ]
+        }
+      ]
+    },
+    "credentials": {
+      "type": "array",
+      "description": "[FUTURE RELEASE], List of the secret credentials that the resource requires. These are not the actual credentials themselves, just references to what the user needs.",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the credential so the user knows what to include"
+            },
+            "type": {
+              "type": "string",
+              "description": "specify whether it is an environment variable or a file",
+              "enum": ["environment_variable","file"]
+            },
+            "location": {
+              "type": "string",
+              "description": "for an environment_variable, the name of the variable. For a file, the path to the file on the system"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "type",
+            "location"
+          ]
+        }
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "description": "Name of owner. Must refer to an existing user or group within Saturn."
+    },
+    "collaborators": {
+      "type": "array",
+      "description": "Name of collaborators. Must refer to existing users or groups within Saturn.",
+      "items": [
+        {"type": "string"}
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "name"
+  ],
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["image_name"]
+    },
+    {
+      "type": "object",
+      "required": ["image_uri"]
+    }
+  ],
+  "anyOf": [
+    {"required": ["jupyter_server"]},
+    {"required": ["rstudio_workbench"]},
+    {"required": ["job"]},
+    {"required": ["deployment"]}
+  ],
+  "$defs": {
+    "instance_type": {
+      "type": "string",
+      "description": "The instance size to deploy on. Must be a name from http://saturncloud.io/static/constants.yaml"
+    },
+    "start_ssh": {
+      "type": "boolean",
+      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server and rstudio_workbench)",
+      "default": false
+    },
+    "disk_space": {
+      "type": "string",
+      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)"
+    },
+    "auto_shutoff": {
+      "type": "string",
+      "description": "The amount of time before the server shuts off. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
+      "default": "1 hour"
+    },
+    "schedule": {
+      "type": ["string", "null"],
+      "description": "If included, a job will run on this Kubernetes CRON schedule. If is a job and not included, job will run on command only (Resource types: job only)"
+    },
+    "command": {
+      "type": "string",
+      "description": "Command used to run job/deployment. (Resource types: job and deployment)"
+    }
+  }
+}
