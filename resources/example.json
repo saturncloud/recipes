@@ -31,7 +31,7 @@
     },
     {
       "url": "git@github.com:jnolis/pet-names.git",
-      "read_only": false,
+      "on_restart": "preserve changes",
       "reference_type": "branch",
       "reference": "dev"
     }
