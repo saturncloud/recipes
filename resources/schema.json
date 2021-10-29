@@ -190,10 +190,14 @@
               "description": "Whether git repository is public. If the repository is private then the user will need to set up git credentials.",
               "default": "true"
             },
-            "read_only": {
-              "type": "boolean",
-              "description": "Whether to allow pushes to the git repo. Note: if the git repo is read-only then it will be recloned on restart, but allowing pushes requires the Saturn Cloud user has git credentials.",
-              "default": "true"
+            "on_restart": {
+              "type": "string",
+              "description": "What behavior to take when the resource restarts - reclone the repository, or preserve local changes",
+              "enum": [
+                "preserve changes",
+                "reclone"
+              ],
+              "default": "preserve changes"
             },
             "reference_type": {
               "type": "string",
