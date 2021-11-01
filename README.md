@@ -7,9 +7,19 @@ With our customers increasingly interested in infrastructure-as-code and not hav
 
 For resources, they can be specified with one or more files:
 
-* `saturn-resource.json` (required) - a json file that specifies how the resource should be created. This should fully encapsulate all of the parameters you can set in the UI.
-* `saturn-resource-start.sh` (optional) - if easier, rather then putting the startup script in the json file it can be uploaded separately
+* `recipe.json` (required) - a json file that specifies how the resource should be created. This should fully encapsulate all of the parameters you can set in the UI.
 
-## Images
+Here is how you would validate the example using the schema for resources in Python:
 
-For images, they can be specified with a single file `saturn-image.json`. This can either specify an entire image/version pair, or just a version of an existing image (the only difference being whether to include the like, cpu/gpu, description, and other image-level facts)
+```python
+import json
+from jsonschema import validate
+
+with open('resources/schema.json') as f:
+    schema = json.load(f)
+
+with open('resources/example.json') as f:
+    instance = json.load(f)
+
+validate(instance=instance, schema=schema)
+```
