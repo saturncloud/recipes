@@ -44,11 +44,15 @@
         },
         "cran": {
           "type": "string",
-          "description": "[FUTURE RELEASE], Packages to install from CRAN (RStudio Workbench only)"
+          "description": "List of packages to install from CRAN, each separated by a space(RStudio Server only)"
         },
         "github": {
           "type": "string",
-          "description": "[FUTURE RELEASE], Packages to install from GitHub (RStudio Workbench only)"
+          "description": "Packages to install from GitHub, each separated by a space (RStudio Server only)"
+        },
+        "bioconductor": {
+          "type": "string",
+          "description": "Packages to install from Bioconductor, each separated by a space (RStudio Server only)"
         },
         "use_mamba": {
           "type": "boolean",
@@ -114,7 +118,7 @@
       "disk_space": { "$ref": "#/$defs/disk_space" },
       "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
     },
-    "rstudio_workbench": {
+    "rstudio_server": {
       "instance_type": { "$ref": "#/$defs/instance_type" },
       "start_ssh": { "$ref": "#/$defs/start_ssh" },
       "disk_space": { "$ref": "#/$defs/disk_space" },
@@ -279,7 +283,7 @@
   ],
   "anyOf": [
     {"required": ["jupyter_server"]},
-    {"required": ["rstudio_workbench"]},
+    {"required": ["rstudio_server"]},
     {"required": ["job"]},
     {"required": ["deployment"]}
   ],
@@ -290,16 +294,16 @@
     },
     "start_ssh": {
       "type": "boolean",
-      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server and rstudio_workbench)",
+      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server and rstudio_server)",
       "default": false
     },
     "disk_space": {
       "type": "string",
-      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)"
+      "description": "The amount of disk space to include with the server. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_server)"
     },
     "auto_shutoff": {
       "type": "string",
-      "description": "The amount of time before the server shuts off. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_workbench)",
+      "description": "The amount of time before the server shuts off. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_server)",
       "default": "1 hour"
     },
     "schedule": {
