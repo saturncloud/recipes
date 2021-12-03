@@ -8,6 +8,10 @@
       "description": "Name of the resource.",
       "pattern": "^[-a-zA-Z0-9]+$"
     },
+    "owner": {
+      "type": "string",
+      "description": "Optional name of the user or group who will own the resource upon creation. If blank the user creating the resource is the owner. USE WITH CAUTION: in most situations this should be left blank."
+    },
     "description": {
       "type": "string",
       "description": "Details about the resource, to help distinguish them."
@@ -254,10 +258,6 @@
           ]
         }
       ]
-    },
-    "owner": {
-      "type": "string",
-      "description": "Optional name of the user or group who will own the resource upon creation. If blank the user creating the resource is the owner. USE WITH CAUTION: in most situations this should be left blank."
     },
     "version": {
       "type": "string",
