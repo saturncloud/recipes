@@ -10,7 +10,7 @@
     },
     "owner": {
       "type": "string",
-      "description": "Optional name of the user or group who will own the resource upon creation. If blank the user creating the resource is the owner. USE WITH CAUTION: in most situations this should be left blank."
+      "description": "Optional name of the user or group who will owns the resource. The field is ignored if the recipe is used to clone a new resource."
     },
     "description": {
       "type": "string",
