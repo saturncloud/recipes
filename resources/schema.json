@@ -8,6 +8,10 @@
       "description": "Name of the resource.",
       "pattern": "^[-a-zA-Z0-9]+$"
     },
+    "owner": {
+      "type": "string",
+      "description": "Optional name of the user or group who will own the resource. The field is ignored if the recipe is used to clone a new resource."
+    },
     "description": {
       "type": "string",
       "description": "Details about the resource, to help distinguish them."
@@ -255,9 +259,9 @@
         }
       ]
     },
-    "owner": {
+    "version": {
       "type": "string",
-      "description": "Name of owner. Must refer to an existing user or group within Saturn."
+      "description": "The version of Saturn Cloud used when creating the recipe."
     },
     "collaborators": {
       "type": "array",
