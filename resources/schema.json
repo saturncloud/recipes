@@ -28,7 +28,7 @@
     "working_directory": {
       "type": "string",
       "description": "Location to use to run commands.",
-      "default": "/home/jovyan"
+      "default": "/home/jovyan/workspace"
     },
     "extra_packages": {
       "type": "object",
