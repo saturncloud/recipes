@@ -28,7 +28,7 @@
     "working_directory": {
       "type": "string",
       "description": "Location to use to run commands.",
-      "default": "/home/jovyan/git-repos"
+      "default": "/home/jovyan"
     },
     "extra_packages": {
       "type": "object",
@@ -189,7 +189,7 @@
               "type": "string",
               "description": "The URL of the git repo. HTTPS or git urls are both valid."
             },
-            "location": {
+            "path": {
               "type": "string",
               "description": "Where to clone the git repo to."
             },
