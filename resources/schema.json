@@ -48,15 +48,15 @@
         },
         "cran": {
           "type": "string",
-          "description": "list of packages to install from CRAN, each separated by a space (RStudio Server only)"
+          "description": "List of packages to install from CRAN, each separated by a space (RStudio Server only)"
         },
         "github": {
           "type": "string",
-          "description": "packages to install from GitHub, each separated by a space (RStudio Server only)"
+          "description": "List of packages to install from GitHub, each separated by a space (RStudio Server only)"
         },
         "bioconductor": {
           "type": "string",
-          "description": "packages to install from Bioconductor, each separated by a space (RStudio Server only)"
+          "description": "List of packages to install from Bioconductor, each separated by a space (RStudio Server only)"
         },
         "use_mamba": {
           "type": "boolean",
