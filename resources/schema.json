@@ -48,9 +48,13 @@
         },
         "cran": {
           "type": "string",
+<<<<<<< HEAD
           "description": "List of packages to install from CRAN, each separated by a space (RStudio Server only)"
+=======
+          "description": "List of packages to install from CRAN, each separated by a space(RStudio Server only)"
+>>>>>>> 2021.11.10
         },
-        "github": {
+        "remotes": {
           "type": "string",
           "description": "List of packages to install from GitHub, each separated by a space (RStudio Server only)"
         },
