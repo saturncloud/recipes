@@ -259,6 +259,10 @@
       "type": "string",
       "description": "Name of owner. Must refer to an existing user or group within Saturn."
     },
+    "version": {
+      "type": "string",
+      "description": "The version of Saturn Cloud used when creating the recipe."
+    },
     "collaborators": {
       "type": "array",
       "description": "Name of collaborators. Must refer to existing users or groups within Saturn.",
