@@ -3,6 +3,18 @@
   "title": "Resource Set",
   "type": "object",
   "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the resource set."
+    },
+    "description": {
+      "type": "string",
+      "description": "Details about the resource set."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version of Saturn Cloud used when creating the resource set."
+    },
     "resources": {
       "type": "array",
       "description": "List of resources to be included in this set.",
@@ -12,5 +24,9 @@
         }
       ]
     }
-  }
+  },
+  "additionalProperties": false,
+  "required": [
+    "resources"
+  ]
 }
