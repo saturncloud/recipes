@@ -3,7 +3,7 @@
     {
       "name": "my-jupyter-server",
       "description": "A demonstration of the saturn.json schema",
-      "image_name": "saturncloud/saturn:2021.11.10",
+      "image_uri": "saturncloud/saturn:2021.11.10",
       "extra_packages": {
         "conda": "tensorflow==2.6.0 papermill"
       },
