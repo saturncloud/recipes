@@ -27,6 +27,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "resources"
+    "resources",
+    "version"
   ]
 }
