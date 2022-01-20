@@ -22,8 +22,8 @@ for d in root.iterdir():
 for r, s in schemas.items():
     print(f"validating '{r}'...")
     resolver = RefResolver(f"{r}/schema.json", s)
-    # 'resource-sets' needs a relative import, which jsonschema doesn't natively support
-    if r == "resource-sets":
+    # 'sets' needs a relative import, which jsonschema doesn't natively support
+    if r == "sets":
         resolver.store["/resources/schema.json"] = schemas["resources"]
     validator: Validator = validator_for(s)(s, resolver)
     validator.validate(examples[r])
