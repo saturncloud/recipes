@@ -1,12 +1,25 @@
 {
-    "image_name": "tensorflow",
-    "image_description": "A working tensorflow GPU image",
-    "image_hardware_type": "GPU",
-    "image_language": "python",
-    "version_name": "v4",
-    "version_description": "now includes keras",
-    "version_build_data": {
-        "base_image_uri": "saturncloud/saturnbase:2021.08.16-2",
-        "pip_requirements": "tensorflow=2.6.0"
-    }
+    "name": "r-tensorflow",
+    "description": "tensorflow and R stuff",
+    "owner": "jnolis",
+    "visibility": "owner",
+    "hardware_type": "cpu",
+    "ide_support": ["rstudio", "jupyter"],
+    "dask_support": false,
+    "image_versions": [
+        {
+            "name": "2022.01.06",
+            "description": "initial version",
+            "build_data": {
+                "base_image_uri": "saturncloud/saturnbase:2021.08.16-2",
+                "pip_requirements": "tensorflow=2.6.0"
+            }
+        },
+        {
+            "name": "2022.01.07",
+            "description": "switched to external build",
+            "external_image": "772275760547.dkr.ecr.us-west-2.amazonaws.com/saturn-tensorflow-384"
+        }
+    ],
+    "saturn_version": "2021.01.03"
 }
