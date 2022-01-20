@@ -1,0 +1,95 @@
+{
+  "resources": [
+    {
+      "name": "my-jupyter-server",
+      "description": "A demonstration of the saturn.json schema",
+      "image_name": "saturncloud/saturn:2021.11.10",
+      "extra_packages": {
+        "conda": "tensorflow==2.6.0 papermill"
+      },
+      "environment_variables": {
+        "VAR1": "VALUE1",
+        "VAR2": "VALUE2"
+      },
+      "start_script": "pip install torch",
+      "jupyter_server": {
+        "instance_type": "xlarge",
+        "start_ssh": true,
+        "disk_space": "10gb",
+        "auto_shutoff": "1 hour"
+      },
+      "dask_cluster": {
+        "num_workers": 3,
+        "scheduler": {
+          "instance_type": "xlarge"
+        },
+        "worker": {
+          "instance_type": "xlarge"
+        }
+      },
+      "git_repositories": [
+        {
+          "url": "git@github.com:tmobile/r-tensorflow-api.git"
+        },
+        {
+          "url": "git@github.com:jnolis/pet-names.git",
+          "on_restart": "preserve changes",
+          "reference_type": "branch",
+          "reference": "dev"
+        }
+      ],
+      "credentials": [
+        {
+          "name": "snowflake_key",
+          "type": "file",
+          "location": "/snowflake.txt"
+        },
+        {
+          "name": "snowflake_password",
+          "type": "environment_variable",
+          "location": "SNOWFLAKE_PASSWORD"
+        }
+      ]
+    },
+    {
+      "name": "my-rstudio-server",
+      "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
+      "description": "An RStudio server.",
+      "rstudio_server": {
+        "instance_type": "medium"
+      }
+    },
+    {
+      "name": "my-dashboard",
+      "image_uri": "saturncloud/saturn:2021.11.10",
+      "description": "A dashboard deployment.",
+      "deployment": {
+        "instance_type": "medium",
+        "public": false,
+        "command": "python mydashboard.py"
+      }
+    },
+    {
+      "name": "a-scheduled-job",
+      "image_uri": "saturncloud/saturn:2021.11.10",
+      "description": "A job with a schedule.",
+      "environment_variables": {
+        "FOO": "bar",
+        "BAZ": "ooper"
+      },
+      "git_repositories": [
+        {
+          "url": "git@github.com:saturncloud/examples.git",
+          "on_restart": "reclone"
+        }
+      ],
+      "job": {
+        "instance_type": "medium",
+        "command": "echo 'Hello World'",
+        "concurrency_policy": "Forbid",
+        "backoff_limit": 1,
+        "schedule": "*/5 * * * *"
+      }
+    }
+  ]
+}
