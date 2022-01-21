@@ -263,6 +263,10 @@
       "type": "string",
       "description": "The version of Saturn Cloud used when creating the recipe."
     },
+    "version": {
+      "type": "string",
+      "description": "The version of Saturn Cloud used when creating the recipe."
+    },
     "collaborators": {
       "type": "array",
       "description": "Name of collaborators. Must refer to existing users or groups within Saturn.",
@@ -273,7 +277,8 @@
   },
   "additionalProperties": false,
   "required": [
-    "name"
+    "name",
+    "version"
   ],
   "oneOf": [
     {
