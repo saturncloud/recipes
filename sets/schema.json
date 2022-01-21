@@ -5,19 +5,19 @@
   "properties": {
     "name": {
       "type": "string",
-      "description": "Name of the set of resources."
+      "description": "Name of the set of recipes."
     },
     "description": {
       "type": "string",
-      "description": "Details about the set of resources."
+      "description": "Details about the set of recipes."
     },
     "version": {
       "type": "string",
-      "description": "The version of Saturn Cloud used when creating the set of resources."
+      "description": "The version of Saturn Cloud used when creating the set of recipes."
     },
     "resources": {
       "type": "array",
-      "description": "List of resources to be included in this set.",
+      "description": "List of recipes to be included in this set.",
       "items": [
         {
           "$ref": "/resources/schema.json"
