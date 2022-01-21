@@ -1,19 +1,19 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Resource Set",
+  "title": "Set",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Name of the resource set."
+      "description": "Name of the set of resources."
     },
     "description": {
       "type": "string",
-      "description": "Details about the resource set."
+      "description": "Details about the set of resources."
     },
     "version": {
       "type": "string",
-      "description": "The version of Saturn Cloud used when creating the resource set."
+      "description": "The version of Saturn Cloud used when creating the set of resources."
     },
     "resources": {
       "type": "array",
