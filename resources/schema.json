@@ -259,9 +259,9 @@
         }
       ]
     },
-    "version": {
+    "schema_version": {
       "type": "string",
-      "description": "The version of Saturn Cloud used when creating the recipe."
+      "description": "The version of the recipe schema used. Typically the same as the Saturn Cloud version used when creating the recipe."
     },
     "public": {
       "type": "boolean",
