@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Either the name of an existing image, or the name to give to the new image",
+      "pattern": "^[-a-zA-Z0-9\\.]+$"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description to use for that image. Required only if the image doesn't already exist."
+    },
+    "owner": {
+      "type": "string",
+      "description": "The owner of the image"
+    },
+    "hardware_type": {
+      "type": "string",
+      "description": "What hardware type the image version should be run on.",
+      "enum": [
+        "cpu",
+        "gpu"
+      ]
+    },
+    "ide_support": {
+      "type": "array",
+      "description": "the IDEs the version supports, allowed values are 'rstudio' and 'jupyter'",
+      "items": [
+        {
+          "type": "string",
+          "enum": [
+            "rstudio",
+            "jupyter"
+          ]
+        }
+      ]
+    },
+    "dask_support": {
+      "type": "boolean",
+      "description": "does the image type support dask"
+    },
+    "image_versions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "the name of the version",
+              "pattern": "^[-a-zA-Z0-9\\.]+$"
+            },
+            "description": {
+              "type": "string",
+              "description": "the description of the image version"
+            },
+            "build_data": {
+              "type": "object",
+              "description": "details on how this version of the image is being built",
+              "oneOf": [
+                {
+                  "description": "Details for when building an image using the Saturn Cloud build pipeline",
+                  "properties": {
+                    "base_image_uri": {
+                      "type": "string",
+                      "description": "The base image to build from"
+                    },
+                    "pip_requirements": {
+                      "type": "string",
+                      "description": "Packages to install from pip"
+                    },
+                    "conda_environment": {
+                      "type": "string",
+                      "description": "A conda environment yaml"
+                    },
+                    "apt_packages": {
+                      "type": "string",
+                      "description": "Packages to install from apt-get install"
+                    },
+                    "post_build": {
+                      "type": "string",
+                      "description": "A shell script to execute as the last step"
+                    }
+                  },
+                  "required": [
+                    "base_image_uri"
+                  ]
+                },
+                {
+                  "description": "Details for when building an image from an external location",
+                  "properties": {
+                    "external_image_uri": {
+                      "description": "location of the external image to use",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "external_image_uri"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "The version of the schema used. Typically associated with a Saturn Cloud version"
+    }
+  },
+  "required": [
+    "name",
+    "hardware_type",
+    "ide_support",
+    "dask_support"
+  ]
+}
