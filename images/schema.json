@@ -13,7 +13,7 @@
     },
     "owner": {
       "type": "string",
-      "description": "The owner of the image. This can be then name of a user or a group."
+      "description": "The owner of the image. This can be the name of a user or a group."
     },
     "visibility": {
       "type": "string",
