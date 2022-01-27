@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
     "name": {
@@ -9,11 +9,19 @@
     },
     "description": {
       "type": "string",
-      "description": "The description to use for that image. Required only if the image doesn't already exist."
+      "description": "The description to use for the image."
     },
     "owner": {
       "type": "string",
-      "description": "The owner of the image"
+      "description": "The owner of the image. This can be then name of a user or a group."
+    },
+    "visibility": {
+      "type": "string",
+      "description": "Who should be allowed to use the image.",
+      "enum": [
+        "owner",
+        "org"
+      ]
     },
     "hardware_type": {
       "type": "string",
@@ -23,22 +31,19 @@
         "gpu"
       ]
     },
-    "ide_support": {
+    "supports": {
       "type": "array",
-      "description": "the IDEs the version supports, allowed values are 'rstudio' and 'jupyter'",
+      "description": "Types of resource that the image supports",
       "items": [
         {
           "type": "string",
           "enum": [
             "rstudio",
-            "jupyter"
+            "jupyter",
+            "dask"
           ]
         }
       ]
-    },
-    "dask_support": {
-      "type": "boolean",
-      "description": "does the image type support dask"
     },
     "image_versions": {
       "type": "array",
@@ -48,62 +53,62 @@
           "properties": {
             "name": {
               "type": "string",
-              "description": "the name of the version",
+              "description": "The name of the image version",
               "pattern": "^[-a-zA-Z0-9\\.]+$"
             },
             "description": {
               "type": "string",
-              "description": "the description of the image version"
+              "description": "The description of the image version"
             },
             "build_data": {
               "type": "object",
-              "description": "details on how this version of the image is being built",
-              "oneOf": [
-                {
-                  "description": "Details for when building an image using the Saturn Cloud build pipeline",
-                  "properties": {
-                    "base_image_uri": {
-                      "type": "string",
-                      "description": "The base image to build from"
-                    },
-                    "pip_requirements": {
-                      "type": "string",
-                      "description": "Packages to install from pip"
-                    },
-                    "conda_environment": {
-                      "type": "string",
-                      "description": "A conda environment yaml"
-                    },
-                    "apt_packages": {
-                      "type": "string",
-                      "description": "Packages to install from apt-get install"
-                    },
-                    "post_build": {
-                      "type": "string",
-                      "description": "A shell script to execute as the last step"
-                    }
-                  },
-                  "required": [
-                    "base_image_uri"
-                  ]
+              "description": "[FUTURE RELEASE] Details for when building an image using the Saturn Cloud build pipeline",
+              "properties": {
+                "base_image_uri": {
+                  "type": "string",
+                  "description": "The base image to build from"
                 },
-                {
-                  "description": "Details for when building an image from an external location",
-                  "properties": {
-                    "external_image_uri": {
-                      "description": "location of the external image to use",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "external_image_uri"
-                  ]
+                "pip_requirements": {
+                  "type": "string",
+                  "description": "Contents of a pip requirements.txt"
+                },
+                "conda_environment": {
+                  "type": "string",
+                  "description": "Contents of a conda environment yaml"
+                },
+                "apt_packages": {
+                  "type": "string",
+                  "description": "Packages to install from apt-get install"
+                },
+                "post_build": {
+                  "type": "string",
+                  "description": "A shell script to execute as the last step"
+                },
+                "use_mamba": {
+                  "type": "boolean",
+                  "description": "Whether to use mamba when installing via conda.",
+                  "default": "true"
                 }
+              },
+              "additionalProperties": false,
+              "required": [
+                "base_image_uri"
               ]
+            },
+            "archived": {
+              "type": "boolean",
+              "description": "Whether the image is archived. When an image is archived it cannot be used for new resources.",
+              "default": "false"
+            },
+            "image_uri": {
+              "type": ["string", "null"],
+              "description": "Location of the image. Required for externally-built images. If set to null then [FUTURE RELEASE] the image will be built according to build data."
             }
           },
+          "additionalProperties": false,
           "required": [
-            "name"
+            "name",
+            "image_uri"
           ]
         }
       ]
@@ -113,10 +118,11 @@
       "description": "The version of the schema used. Typically associated with a Saturn Cloud version"
     }
   },
+  "additionalProperties": false,
   "required": [
     "name",
     "hardware_type",
-    "ide_support",
-    "dask_support"
+    "image_versions",
+    "schema_version"
   ]
 }

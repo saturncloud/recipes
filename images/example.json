@@ -4,8 +4,7 @@
     "owner": "jnolis",
     "visibility": "owner",
     "hardware_type": "cpu",
-    "ide_support": ["rstudio", "jupyter"],
-    "dask_support": false,
+    "supports": ["rstudio", "jupyter"],
     "image_versions": [
         {
             "name": "2022.01.06",
@@ -13,12 +12,14 @@
             "build_data": {
                 "base_image_uri": "saturncloud/saturnbase:2021.08.16-2",
                 "pip_requirements": "tensorflow=2.6.0"
-            }
+            },
+            "archived": true,
+            "image_uri": null
         },
         {
             "name": "2022.01.07",
             "description": "switched to external build",
-            "external_image": "772275760547.dkr.ecr.us-west-2.amazonaws.com/saturn-tensorflow-384"
+            "image_uri": "772275760547.dkr.ecr.us-west-2.amazonaws.com/saturn-tensorflow-384"
         }
     ],
     "schema_version": "2021.01.03"
