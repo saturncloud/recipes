@@ -33,7 +33,7 @@
     },
     "supports": {
       "type": "array",
-      "description": "Types of resource that the image supports",
+      "description": "[FUTURE RELEASE] Types of resource that the image supports",
       "items": [
         {
           "type": "string",
@@ -45,7 +45,7 @@
         }
       ]
     },
-    "image_versions": {
+    "versions": {
       "type": "array",
       "items": [
         {
@@ -122,7 +122,7 @@
   "required": [
     "name",
     "hardware_type",
-    "image_versions",
+    "versions",
     "schema_version"
   ]
 }
