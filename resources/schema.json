@@ -166,7 +166,7 @@
         },
         "public": {
           "type": "boolean",
-          "description": "Whether to make it public and allow unauthenticated access.",
+          "description": "Whether to allow unauthenticated access to the deployment.",
           "default": "false"
         }
       },
@@ -263,10 +263,14 @@
       "type": "string",
       "description": "The version of Saturn Cloud used when creating the recipe."
     },
-    "public": {
-      "type": "boolean",
-      "description": "Whether to allow any user or group to clone the resource.",
-      "default": "false"
+    "visibility": {
+      "type": "string",
+      "description": "Who should be allowed to clone the resource.",
+      "default": "owner",
+      "enum": [
+        "owner",
+        "org"
+      ]
     }
   },
   "additionalProperties": false,
