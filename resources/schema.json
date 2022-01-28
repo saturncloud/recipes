@@ -16,14 +16,27 @@
       "type": "string",
       "description": "Details about the resource, to help distinguish them."
     },
-    "image_name": {
-      "type": "string",
-      "description": "[FUTURE RELEASE], The name image to use with the resource. The image with correct owner and version must exist in the particular Saturn Cloud deployment for the resource to work (either Hosted or a particular Enterprise installation). Must include exactly one of image_name or image_uri",
-      "pattern": "^[-a-zA-Z0-9]+/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$"
-    },
-    "image_uri": {
-      "type": "string",
-      "description": "The URI of the image - image still needs to exist in saturn."
+    "image": {
+      "type": "object",
+      "description": "The image to use with the resource. The image must exist in the particular Saturn Cloud installation for the resource to work (either Hosted or a particular Enterprise installation)",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The URI of the image."
+        },
+        "owner": {
+          "type": "string",
+          "description": "[FUTURE RELEASE] The owner of the image - must be provided if name and version are provided."
+        },
+        "name": {
+          "type": "string",
+          "description": "[FUTURE RELEASE], The name of the image - must be provided if owner and version are provided"
+        },
+        "version": {
+          "type": "string",
+          "description": "[FUTURE RELEASE], The version of the image - must be provided if name and owner are provided."
+        }
+      }
     },
     "working_directory": {
       "type": "string",
