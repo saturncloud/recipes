@@ -259,6 +259,14 @@
         }
       ]
     },
+    "thumbnail_image_url": {
+      "type": "string",
+      "description": "[FUTURE RELEASE] Publicly accessible URL of a picture to use as a thumbnail for the resource."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "[FUTURE RELEASE] The relative priority to use when displaying lists of resources. Lower numbers appear earlier in lists."
+    },
     "version": {
       "type": "string",
       "description": "The version of Saturn Cloud used when creating the recipe."
