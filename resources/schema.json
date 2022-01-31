@@ -272,7 +272,7 @@
   "additionalProperties": false,
   "required": [
     "name",
-    "version"
+    "schema_version"
   ],
   "oneOf": [
     {
