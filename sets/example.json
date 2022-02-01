@@ -1,7 +1,7 @@
 {
   "resources": [
     {
-      "version": "2021.11.10",
+      "version": "2022.01.06",
       "name": "my-jupyter-server",
       "description": "A demonstration of the saturn.json schema",
       "image_uri": "saturncloud/saturn:2021.11.10",
@@ -53,7 +53,7 @@
       ]
     },
     {
-      "version": "2021.11.10",
+      "version": "2022.01.06",
       "name": "my-rstudio-server",
       "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
       "description": "An RStudio server.",
@@ -62,7 +62,7 @@
       }
     },
     {
-      "version": "2021.11.10",
+      "version": "2022.01.06",
       "name": "my-dashboard",
       "image_uri": "saturncloud/saturn:2021.11.10",
       "description": "A dashboard deployment.",
@@ -73,7 +73,7 @@
       }
     },
     {
-      "version": "2021.11.10",
+      "version": "2022.01.06",
       "name": "a-scheduled-job",
       "image_uri": "saturncloud/saturn:2021.11.10",
       "description": "A job with a schedule.",
@@ -96,5 +96,5 @@
       }
     }
   ],
-  "version": "2021.11.10"
+  "version": "2022.01.06"
 }
