@@ -19,7 +19,7 @@
     "image_name": {
       "type": "string",
       "description": "[FUTURE RELEASE], The name image to use with the resource. The image with correct owner and version must exist in the particular Saturn Cloud deployment for the resource to work (either Hosted or a particular Enterprise installation). Must include exactly one of image_name or image_uri",
-      "pattern": "^[-a-zA-Z0-9]+/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$"
+      "pattern": "^[-a-zA-Z0-9]+/[-a-zA-Z0-9]+:[-a-zA-Z0-9\\.]+$"
     },
     "image_uri": {
       "type": "string",

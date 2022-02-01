@@ -48,5 +48,5 @@
       "location": "SNOWFLAKE_PASSWORD"
     }
   ],
-  "schema_version": "2021.11.10"
+  "schema_version": "2022.01.06"
 }
