@@ -40,8 +40,9 @@ for r, s in schemas.items():
     mandatoryAdditionalProperties(s, r)
     resolver = RefResolver(f"{r}/schema.json", s)
     # 'sets' needs a relative import, which jsonschema doesn't natively support
-    if r == "sets":
-        resolver.store["/resources/schema.json"] = schemas["resources"]
+    resolver.store["/resources/schema.json"] = schemas["resources"]
+    resolver.store["/templates/schema.json"] = schemas["templates"]
+    resolver.store["/images/schema.json"] = schemas["images"]
     validator: Validator = validator_for(s)(s, resolver)
     validator.validate(examples[r])
     print("success!")

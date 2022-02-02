@@ -1,4 +1,46 @@
 {
+  "images": [
+    {
+      "name": "saturn",
+      "hardware_type": "cpu",
+      "versions": [
+        {
+          "name": "2021.11.10",
+          "image_uri": "saturncloud/saturn:2021.11.10"
+        }
+      ],
+      "schema_version": "2022.01.06"
+    },
+    {
+      "name": "saturn-rstudio",
+      "supports": ["dask", "rstudio"],
+      "hardware_type": "cpu",
+      "versions": [
+        {
+          "name": "2021.11.10",
+          "image_uri": "saturncloud/saturn-rstudio:2021.11.10"
+        }
+      ],
+      "schema_version": "2022.01.06"
+    }
+  ],
+  "templates": [
+    {
+      "title": "Fake title",
+      "weight": 100,
+      "thumbnail_image_url": "https://saturn-public-assets.s3.us-east-2.amazonaws.com/example-thumbnails/rstudio.png",
+      "resource": {
+        "schema_version": "2022.01.06",
+        "name": "my-rstudio-server",
+        "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
+        "description": "An RStudio server.",
+        "rstudio_server": {
+          "instance_type": "medium"
+        }
+      },
+      "schema_version": "2022.01.06"
+    }
+  ],
   "resources": [
     {
       "schema_version": "2022.01.06",
