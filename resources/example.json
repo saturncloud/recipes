@@ -36,6 +36,17 @@
       "reference": "dev"
     }
   ],
+  "shared_folders": [
+    {
+      "owner": "alex",
+      "name": "data"
+    },
+    {
+      "owner": "julia",
+      "name": "data",
+      "path": "/home/jovyan/shared/my-data"
+    }
+  ],
   "credentials": [
     {
       "name": "snowflake_key",
