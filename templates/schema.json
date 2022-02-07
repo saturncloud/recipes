@@ -7,6 +7,10 @@
       "type": "string",
       "description": "Human readable title of the template."
     },
+    "subtitle": {
+      "type": "string",
+      "description": "Longer description of the template."
+    },
     "thumbnail_image_url": {
       "type": "string",
       "description": "Publicly accessible url containing an image to use as the thumbnail. Image should be 500px wide by 250px high."
