@@ -30,11 +30,13 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the image."
+          "description": "The name of the image.",
+          "pattern": "^[-a-zA-Z0-9]+$"
         },
         "version": {
           "type": "string",
-          "description": "The version of the image."
+          "description": "The version of the image.",
+          "pattern": "^[-a-zA-Z0-9]+$"
         }
       },
       "additionalProperties": false,
@@ -185,7 +187,7 @@
         },
         "public": {
           "type": "boolean",
-          "description": "Whether to make it public and allow unauthenticated access.",
+          "description": "Whether to allow unauthenticated access to the deployment.",
           "default": "false"
         }
       },
@@ -248,6 +250,34 @@
         }
       ]
     },
+    "shared_folders": {
+      "type": "array",
+      "description": "[FUTURE RELEASE] List of shared folders to include with the resource (only valid for Jupyter Servers and RStudio Servers). These shared folders must already exist in Saturn.",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Owner of the shared folder."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the shared folder."
+            },
+            "path": {
+              "type": "string",
+              "description": "Where to mount this shared folder. Defaults to '/home/jovyan/shared/<owner>/<name>'"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "owner",
+            "name"
+          ]
+        }
+      ]
+    },
     "credentials": {
       "type": "array",
       "description": "[FUTURE RELEASE], List of the secret credentials that the resource requires. These are not the actual credentials themselves, just references to what the user needs.",
@@ -278,20 +308,24 @@
         }
       ]
     },
-    "version": {
+    "schema_version": {
       "type": "string",
-      "description": "The version of Saturn Cloud used when creating the recipe."
+      "description": "The version of the recipe schema used. Typically the same as the Saturn Cloud version used when creating the recipe."
     },
-    "public": {
-      "type": "boolean",
-      "description": "Whether to allow any user or group to clone the resource.",
-      "default": "false"
+    "visibility": {
+      "type": "string",
+      "description": "Who should be allowed to clone the resource.",
+      "default": "owner",
+      "enum": [
+        "owner",
+        "org"
+      ]
     }
   },
   "additionalProperties": false,
   "required": [
     "name",
-    "version"
+    "schema_version"
   ],
   "oneOf": [
     {
