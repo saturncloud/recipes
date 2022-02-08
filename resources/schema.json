@@ -260,7 +260,7 @@
       ]
     },
     "version": {
-      "type": "string",
+      "const": "2022.01.06",
       "description": "The version of Saturn Cloud used when creating the recipe."
     },
     "collaborators": {
