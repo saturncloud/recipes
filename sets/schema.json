@@ -17,17 +17,34 @@
     },
     "resources": {
       "type": "array",
-      "description": "List of recipes to be included in this set.",
+      "description": "List of resource recipes to be included in this set.",
       "items": [
         {
           "$ref": "/resources/schema.json"
+        }
+      ]
+    },
+    "images": {
+      "type": "array",
+      "description": "[FUTURE RELEASE] List of image recipes to be included in this set.",
+      "items": [
+        {
+          "$ref": "/images/schema.json"
+        }
+      ]
+    },
+    "templates": {
+      "type": "array",
+      "description": "[FUTURE RELEASE] List of template recipes to be included in this set.",
+      "items": [
+        {
+          "$ref": "/templates/schema.json"
         }
       ]
     }
   },
   "additionalProperties": false,
   "required": [
-    "resources",
     "schema_version"
   ]
 }

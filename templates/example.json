@@ -1,0 +1,34 @@
+{
+  "title": "Dask (Python)",
+  "thumbnail_image_url": "https://saturn-public-assets.s3.us-east-2.amazonaws.com/example-thumbnails/dask.png",
+  "weight": 100,
+  "resource": {
+    "name": "example-dask",
+    "image_uri": "public.ecr.aws/saturncloud/saturn:2022.01.06",
+    "description": "Use distributed computing with Dask",
+    "extra_packages": {
+      "pip": "lightgbm"
+    },
+    "working_directory": "/home/jovyan/examples/examples/dask",
+    "git_repositories": [
+      {
+        "url": "https://github.com/saturncloud/examples"
+      }
+    ],
+    "jupyter_server": {
+      "disk_space": "10Gi",
+      "instance_type": "large"
+    },
+    "dask_cluster": {
+      "num_workers": 3,
+      "worker": {
+        "instance_type": "large"
+      },
+      "scheduler": {
+        "instance_type": "large"
+      }
+    },
+    "schema_version": "2022.01.06"
+  },
+  "schema_version": "2022.01.06"
+}
