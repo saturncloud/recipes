@@ -120,7 +120,8 @@
       "instance_type": { "$ref": "#/$defs/instance_type" },
       "start_ssh": { "$ref": "#/$defs/start_ssh" },
       "disk_space": { "$ref": "#/$defs/disk_space" },
-      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
+      "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" }
     },
     "rstudio_server": {
       "instance_type": { "$ref": "#/$defs/instance_type" },
@@ -310,6 +311,11 @@
       "type": "string",
       "description": "The amount of time before the server shuts off. Must be a string Saturn Cloud allows. (Resource types: jupyter_server and rstudio_server)",
       "default": "1 hour"
+    },
+    "use_spot_instance": {
+      "type": "boolean",
+      "description": "Whether the server should use a spot instance",
+      "default": false
     },
     "schedule": {
       "type": ["string", "null"],
