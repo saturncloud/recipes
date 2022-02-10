@@ -13,7 +13,7 @@
     },
     "category": {
       "type": "string",
-      "description": "Optional category to use when showing a list of templates."
+      "description": "[FUTURE RELEASE] Optional category to use when showing a list of templates."
     },
     "thumbnail_image_url": {
       "type": "string",
