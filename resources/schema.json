@@ -101,7 +101,7 @@
             },
             "repo": {
               "type": "string",
-              "description": "[FUTURE RELEASE] URL of a CRAN mirror to use with the repo. If not specified defaults to the result of `getOption("repos")` run on the image.",
+              "description": "[FUTURE RELEASE] URL of a CRAN mirror to use with the repo. If not specified defaults to the result of `getOption(\"repos\")` run on the image."
             }
           }
         },
@@ -115,7 +115,7 @@
               "examples": ["rstudio/tensorflow r-lib/r-oxygen2"]
             },
             "remote": {
-              "type": "enum",
+              "type": "string",
               "description": "[FUTURE RELEASE] Location to pull the remote from.",
               "enum": [
                 "github",
