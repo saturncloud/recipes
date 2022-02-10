@@ -11,6 +11,10 @@
       "type": "string",
       "description": "Longer description of the template."
     },
+    "category": {
+      "type": "string",
+      "description": "Optional category to use when showing a list of templates."
+    },
     "thumbnail_image_url": {
       "type": "string",
       "description": "Publicly accessible url containing an image to use as the thumbnail. Image should be 500px wide by 250px high."
