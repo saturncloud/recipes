@@ -11,9 +11,12 @@
       "type": "string",
       "description": "Longer description of the template."
     },
-    "category": {
-      "type": "string",
-      "description": "[FUTURE RELEASE] Optional category to use when showing a list of templates."
+    "labels": {
+      "type": "array",
+      "description": "[FUTURE RELEASE] Optional labels to use when to categorize templates.",
+      "items": {
+        "type": "string"
+      }
     },
     "thumbnail_image_url": {
       "type": "string",
