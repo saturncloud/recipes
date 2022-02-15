@@ -59,7 +59,7 @@
           "type": "object",
           "description": "Packages to install from conda",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install from conda. This will be appended to `conda install `, so each package should be separated by a space."
             },
@@ -76,7 +76,7 @@
           "type": "object",
           "description": "Packages to install from pip",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install from pip. This will be appended to `pip install `, so each package should be separated by a space."
             }
@@ -88,7 +88,7 @@
           "type": "object",
           "description": "Packages to install from apt",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install from apt. This will be appended to `apt-get install `, so each package should be separated by a space."
             }
@@ -100,7 +100,7 @@
           "type": "object",
           "description": "List of packages to install from CRAN (RStudio Server only).",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install from CRAN. These should be separated by a space--Saturn Cloud will be convert into an R vector.",
               "examples": ["tidytext odbc"]
@@ -117,14 +117,14 @@
           "type": "string",
           "description": "List of packages to install from GitHub or other remotes, each separated by a space (RStudio Server only)",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install from the remote location. These should be separated by a space.",
               "examples": ["rstudio/tensorflow r-lib/r-oxygen2"]
             },
             "remote": {
               "type": "string",
-              "description": "[FUTURE RELEASE] Location to pull the remote from.",
+              "description": "[FUTURE RELEASE] Location to pull the remote from. Currently only supports github",
               "enum": [
                 "github",
                 "gitlab",
@@ -141,7 +141,7 @@
           "type": "object",
           "description": "List of packages to install from Bioconductor (RStudio Server only)",
           "properties": {
-            "packages": {
+            "install": {
               "type": "string",
               "description": "Packages to install, each separated by a space.",
               "examples": ["BiocGenerics BiocVersion"]
