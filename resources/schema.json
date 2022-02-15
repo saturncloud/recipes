@@ -115,7 +115,7 @@
         },
         "remotes": {
           "type": "string",
-          "description": "List of packages to install from GitHub or other remotes, each separated by a space (RStudio Server only)",
+          "description": "List of packages to install from GitHub, each separated by a space (RStudio Server only)",
           "properties": {
             "install": {
               "type": "string",
