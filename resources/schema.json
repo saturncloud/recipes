@@ -69,7 +69,7 @@
               "default": "true"
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         },
         "pip": {
@@ -81,7 +81,7 @@
               "description": "Packages to install from pip. This will be appended to `pip install `, so each package should be separated by a space."
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         },
         "apt": {
@@ -93,7 +93,7 @@
               "description": "Packages to install from apt. This will be appended to `apt-get install `, so each package should be separated by a space."
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         },
         "cran": {
@@ -110,7 +110,7 @@
               "description": "[FUTURE RELEASE] URL of a CRAN mirror to use with the repo. If not specified defaults to the result of `getOption(\"repos\")` run on the image."
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         },
         "remotes": {
@@ -134,7 +134,7 @@
               "default": "github"
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         },
         "bioconductor": {
@@ -147,7 +147,7 @@
               "examples": ["BiocGenerics BiocVersion"]
             }
           },
-          "required": ["packages"],
+          "required": ["install"],
           "additionalProperties": false
         }
       },
