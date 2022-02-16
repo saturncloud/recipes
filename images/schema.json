@@ -114,7 +114,7 @@
       ]
     },
     "schema_version": {
-      "const": "2022.01.06",
+      "const": "main",
       "description": "The version of the schema used. Typically associated with a Saturn Cloud version"
     }
   },
