@@ -4,7 +4,7 @@
   "owner": "jnolis",
   "visibility": "owner",
   "hardware_type": "cpu",
-  "supports": ["rstudio", "jupyter"],
+  "supports": ["rstudio-community", "jupyterlab"],
   "versions": [
     {
       "name": "2022.01.06",

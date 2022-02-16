@@ -13,7 +13,7 @@
     },
     {
       "name": "saturn-rstudio",
-      "supports": ["dask", "rstudio"],
+      "supports": ["dask", "rstudio-community"],
       "hardware_type": "cpu",
       "versions": [
         {

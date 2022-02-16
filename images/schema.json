@@ -38,8 +38,9 @@
         {
           "type": "string",
           "enum": [
-            "rstudio",
-            "jupyter",
+            "rstudio-community",
+            "rstudio-workbench",
+            "jupyterlab",
             "dask"
           ]
         }
