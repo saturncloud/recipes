@@ -56,33 +56,99 @@
       "description": "extra packages to install. Not all of these may exist depending on the resource type and if they are needed",
       "properties": {
         "conda": {
-          "type": "string",
-          "description": "Packages to install from conda"
+          "type": "object",
+          "description": "Packages to install from conda",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install from conda. This will be appended to `conda install `, so each package should be separated by a space."
+            },
+            "use_mamba": {
+              "type": "boolean",
+              "description": "Whether to use mamba when installing via conda. Replaces the command with `mamba install`",
+              "default": "true"
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         },
         "pip": {
-          "type": "string",
-          "description": "Packages to install from pip"
+          "type": "object",
+          "description": "Packages to install from pip",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install from pip. This will be appended to `pip install `, so each package should be separated by a space."
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         },
         "apt": {
-          "type": "string",
-          "description": "Packages to install from apt"
+          "type": "object",
+          "description": "Packages to install from apt",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install from apt. This will be appended to `apt-get install `, so each package should be separated by a space."
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         },
         "cran": {
-          "type": "string",
-          "description": "List of packages to install from CRAN, each separated by a space (RStudio Server only)"
+          "type": "object",
+          "description": "List of packages to install from CRAN (RStudio Server only).",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install from CRAN. These should be separated by a space--Saturn Cloud will be convert into an R vector.",
+              "examples": ["tidytext odbc"]
+            },
+            "repo": {
+              "type": "string",
+              "description": "[FUTURE RELEASE] URL of a CRAN mirror to use with the repo. If not specified defaults to the result of `getOption(\"repos\")` run on the image."
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         },
         "remotes": {
           "type": "string",
-          "description": "List of packages to install from GitHub, each separated by a space (RStudio Server only)"
+          "description": "List of packages to install from GitHub, each separated by a space (RStudio Server only)",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install from the remote location. These should be separated by a space.",
+              "examples": ["rstudio/tensorflow r-lib/r-oxygen2"]
+            },
+            "remote": {
+              "type": "string",
+              "description": "[FUTURE RELEASE] Location to pull the remote from. Currently only supports github",
+              "enum": [
+                "github",
+                "gitlab",
+                "url",
+                "git"
+              ],
+              "default": "github"
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         },
         "bioconductor": {
-          "type": "string",
-          "description": "List of packages to install from Bioconductor, each separated by a space (RStudio Server only)"
-        },
-        "use_mamba": {
-          "type": "boolean",
-          "description": "Whether to use mamba when installing via conda.",
-          "default": "true"
+          "type": "object",
+          "description": "List of packages to install from Bioconductor (RStudio Server only)",
+          "properties": {
+            "install": {
+              "type": "string",
+              "description": "Packages to install, each separated by a space.",
+              "examples": ["BiocGenerics BiocVersion"]
+            }
+          },
+          "required": ["install"],
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
