@@ -11,6 +11,13 @@
       "type": "string",
       "description": "Longer description of the template."
     },
+    "labels": {
+      "type": "array",
+      "description": "[FUTURE RELEASE] Optional labels to use when to categorize templates.",
+      "items": {
+        "type": "string"
+      }
+    },
     "thumbnail_image_url": {
       "type": "string",
       "description": "Publicly accessible url containing an image to use as the thumbnail. Image should be 500px wide by 250px high."
