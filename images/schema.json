@@ -38,7 +38,7 @@
         {
           "type": "string",
           "enum": [
-            "rstudio-community",
+            "rstudio-opensource",
             "rstudio-workbench",
             "jupyterlab",
             "dask"
