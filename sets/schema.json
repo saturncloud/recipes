@@ -26,7 +26,7 @@
     },
     "images": {
       "type": "array",
-      "description": "[FUTURE RELEASE] List of image recipes to be included in this set.",
+      "description": "List of image recipes to be included in this set.",
       "items": [
         {
           "$ref": "/images/schema.json"
