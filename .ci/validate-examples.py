@@ -1,10 +1,18 @@
 import json
+import requests
+
 from pathlib import Path
 from typing import Any, Dict
 
-from jsonschema import RefResolver, Validator
+from jsonschema import RefResolver, Validator, ValidationError
 from jsonschema.validators import validator_for
+from ruamel import yaml
 
+
+INSTANCE_TYPE_OPTIONS_URL = "https://saturncloud.io/static/constants.yaml"
+
+res = requests.get(url=INSTANCE_TYPE_OPTIONS_URL)
+instance_type_options = yaml.safe_load(res.text)["tiers"]
 
 schemas: Dict[str, Any] = {}
 examples: Dict[str, Any] = {}
@@ -45,5 +53,22 @@ for r, s in schemas.items():
     resolver.store["/images/schema.json"] = schemas["images"]
     validator: Validator = validator_for(s)(s, resolver)
     validator.validate(examples[r])
+
+    # check that instance_types are valid
+    recipe = examples[r]
+    for resource in [
+        recipe.get("jupyter_server"),
+        recipe.get("deployment"),
+        recipe.get("job"),
+        recipe.get("rstudio_server"),
+        recipe.get("dask_cluster", {}).get("worker"),
+        recipe.get("dask_cluster", {}).get("scheduler")
+    ]:
+        if resource is not None and resource["instance_type"] not in instance_type_options:
+            raise ValidationError(
+                f"instance_type ('{resource['instance_type']}') is not a valid option. "
+                f"Look at {INSTANCE_TYPE_OPTIONS_URL} for valid options."
+            )
     print("success!")
+
 

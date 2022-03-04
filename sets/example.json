@@ -58,7 +58,7 @@
       "jupyter_server": {
         "instance_type": "xlarge",
         "start_ssh": true,
-        "disk_space": "10gb",
+        "disk_space": "10Gi",
         "auto_shutoff": "1 hour"
       },
       "dask_cluster": {
@@ -91,6 +91,17 @@
           "name": "snowflake_password",
           "type": "environment_variable",
           "location": "SNOWFLAKE_PASSWORD"
+        }
+      ],
+      "shared_folders": [
+        {
+          "owner": "alex",
+          "name": "data"
+        },
+        {
+          "owner": "julia",
+          "name": "data",
+          "path": "/home/jovyan/shared/my-data"
         }
       ]
     },
