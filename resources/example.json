@@ -1,7 +1,7 @@
 {
   "name": "demo",
   "description": "A demonstration of the saturn.json schema",
-  "image_uri": "saturncloud/saturn:2021.11.10",
+  "image_uri": "public.ecr.aws/saturncloud/saturn:2022.01.06",
   "extra_packages": {
     "conda": {"install": "tensorflow==2.6.0 papermill", "use_mamba": false}
   },
@@ -13,7 +13,7 @@
   "jupyter_server": {
     "instance_type": "xlarge",
     "start_ssh": true,
-    "disk_space": "10gb",
+    "disk_space": "10Gi",
     "auto_shutoff": "1 hour"
   },
   "dask_cluster": {
@@ -22,7 +22,8 @@
       "instance_type": "xlarge"
     },
     "worker": {
-      "instance_type": "xlarge"
+      "instance_type": "xlarge",
+      "use_spot_instances": true
     }
   },
   "git_repositories": [
@@ -34,29 +35,6 @@
       "on_restart": "preserve changes",
       "reference_type": "branch",
       "reference": "dev"
-    }
-  ],
-  "shared_folders": [
-    {
-      "owner": "alex",
-      "name": "data"
-    },
-    {
-      "owner": "julia",
-      "name": "data",
-      "path": "/home/jovyan/shared/my-data"
-    }
-  ],
-  "credentials": [
-    {
-      "name": "snowflake_key",
-      "type": "file",
-      "location": "/snowflake.txt"
-    },
-    {
-      "name": "snowflake_password",
-      "type": "environment_variable",
-      "location": "SNOWFLAKE_PASSWORD"
     }
   ],
   "schema_version": "2022.03.01"

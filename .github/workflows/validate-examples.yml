@@ -19,5 +19,4 @@ jobs:
       - name: validate-examples
         shell: bash
         run: |
-          pip install --upgrade jsonschema
-          make validate
+          make install validate
