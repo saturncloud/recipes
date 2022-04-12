@@ -345,16 +345,20 @@
         }
       ]
     },
-    "credentials": {
+    "secrets": {
       "type": "array",
-      "description": "[FUTURE RELEASE], List of the secret credentials that the resource requires. These are not the actual credentials themselves, just references to what the user needs.",
+      "description": "List of the secrets that the resource requires. These are not the actual secrets themselves, just references to what the user needs.",
       "items": [
         {
           "type": "object",
           "properties": {
             "name": {
               "type": "string",
-              "description": "The name of the credential so the user knows what to include"
+              "description": "The name of the secret."
+            },
+            "owner": {
+              "type": "string",
+              "description": "Name of the user or group who owns the secret."
             },
             "type": {
               "type": "string",
@@ -364,11 +368,14 @@
             "location": {
               "type": "string",
               "description": "for an environment_variable, the name of the variable. For a file, the path to the file on the system"
+            },
+            "description": {
+              "type": "string",
+              "description": "Details about the attached secret, to help distinguish them."
             }
           },
           "additionalProperties": false,
           "required": [
-            "name",
             "type",
             "location"
           ]
