@@ -81,14 +81,15 @@
           "reference": "dev"
         }
       ],
-      "credentials": [
+      "secrets": [
         {
+          "owner": "alex",
           "name": "snowflake_key",
           "type": "file",
-          "location": "/snowflake.txt"
+          "location": "/home/jovyan/secrets/snowflake.txt"
         },
         {
-          "name": "snowflake_password",
+          "description": "User's own snowflake password",
           "type": "environment_variable",
           "location": "SNOWFLAKE_PASSWORD"
         }
