@@ -204,17 +204,25 @@
       ]
     },
     "jupyter_server": {
-      "instance_type": { "$ref": "#/$defs/instance_type" },
-      "start_ssh": { "$ref": "#/$defs/start_ssh" },
-      "disk_space": { "$ref": "#/$defs/disk_space" },
-      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
-      "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" }
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "start_ssh": { "$ref": "#/$defs/start_ssh" },
+        "disk_space": { "$ref": "#/$defs/disk_space" },
+        "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
+        "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" }
+      },
+      "additionalProperties": false
     },
     "rstudio_server": {
-      "instance_type": { "$ref": "#/$defs/instance_type" },
-      "start_ssh": { "$ref": "#/$defs/start_ssh" },
-      "disk_space": { "$ref": "#/$defs/disk_space" },
-      "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+      "type": "object",
+      "properties": {
+        "instance_type": { "$ref": "#/$defs/instance_type" },
+        "start_ssh": { "$ref": "#/$defs/start_ssh" },
+        "disk_space": { "$ref": "#/$defs/disk_space" },
+        "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+      },
+      "additionalProperties": false
     },
     "job": {
       "type": "object",
@@ -256,7 +264,8 @@
           "type": "boolean",
           "description": "Whether to allow unauthenticated access to the deployment.",
           "default": "false"
-        }
+        },
+        "start_ssh": { "$ref": "#/$defs/start_ssh" }
       },
       "additionalProperties": false,
       "required": ["instance_type", "command"]
@@ -424,7 +433,7 @@
     },
     "start_ssh": {
       "type": "boolean",
-      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server and rstudio_server)",
+      "description": "Should SSH connections to the server be allowed? (Resource types: jupyter_server, rstudio_server, and deployment)",
       "default": false
     },
     "disk_space": {
