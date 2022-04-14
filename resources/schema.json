@@ -211,7 +211,8 @@
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
         "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" }
-      }
+      },
+      "additionalProperties": false
     },
     "rstudio_server": {
       "type": "object",
@@ -220,7 +221,8 @@
         "start_ssh": { "$ref": "#/$defs/start_ssh" },
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
-      }
+      },
+      "additionalProperties": false
     },
     "job": {
       "type": "object",
