@@ -30,7 +30,7 @@
       "$ref": "/resources/schema.json"
     },
     "schema_version": {
-      "const": "2022.04.01",
+      "const": "2022.05.01",
       "description": "The version of Saturn Cloud used when creating the set of recipes."
     }
   },
