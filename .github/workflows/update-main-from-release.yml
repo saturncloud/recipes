@@ -4,7 +4,7 @@ name: Release -> Main PR
 
 on:
   push:
-    branches: "release-*"
+    branches: "20*"
 
 jobs:
   pull-request:
