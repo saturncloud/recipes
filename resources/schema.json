@@ -392,7 +392,7 @@
       ]
     },
     "schema_version": {
-      "const": "2022.05.01",
+      "const": "2022.06.01",
       "description": "The version of the recipe schema used. Typically the same as the Saturn Cloud version used when creating the recipe."
     },
     "visibility": {

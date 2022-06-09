@@ -9,7 +9,7 @@
           "image_uri": "saturncloud/saturn:2021.11.10"
         }
       ],
-      "schema_version": "2022.05.01"
+      "schema_version": "2022.06.01"
     },
     {
       "name": "saturn-rstudio",
@@ -21,7 +21,7 @@
           "image_uri": "saturncloud/saturn-rstudio:2021.11.10"
         }
       ],
-      "schema_version": "2022.05.01"
+      "schema_version": "2022.06.01"
     }
   ],
   "templates": [
@@ -30,7 +30,7 @@
       "weight": 100,
       "thumbnail_image_url": "https://saturn-public-assets.s3.us-east-2.amazonaws.com/example-thumbnails/rstudio.png",
       "resource": {
-        "schema_version": "2022.05.01",
+        "schema_version": "2022.06.01",
         "name": "my-rstudio-server",
         "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
         "description": "An RStudio server.",
@@ -38,12 +38,12 @@
           "instance_type": "medium"
         }
       },
-      "schema_version": "2022.05.01"
+      "schema_version": "2022.06.01"
     }
   ],
   "resources": [
     {
-      "schema_version": "2022.05.01",
+      "schema_version": "2022.06.01",
       "name": "my-jupyter-server",
       "description": "A demonstration of the saturn.json schema",
       "image_uri": "saturncloud/saturn:2021.11.10",
@@ -107,7 +107,7 @@
       ]
     },
     {
-      "schema_version": "2022.05.01",
+      "schema_version": "2022.06.01",
       "name": "my-rstudio-server",
       "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
       "description": "An RStudio server.",
@@ -116,7 +116,7 @@
       }
     },
     {
-      "schema_version": "2022.05.01",
+      "schema_version": "2022.06.01",
       "name": "my-dashboard",
       "image_uri": "saturncloud/saturn:2021.11.10",
       "description": "A dashboard deployment.",
@@ -127,7 +127,7 @@
       }
     },
     {
-      "schema_version": "2022.05.01",
+      "schema_version": "2022.06.01",
       "name": "a-scheduled-job",
       "image_uri": "saturncloud/saturn:2021.11.10",
       "description": "A job with a schedule.",
@@ -150,5 +150,5 @@
       }
     }
   ],
-  "schema_version": "2022.05.01"
+  "schema_version": "2022.06.01"
 }
