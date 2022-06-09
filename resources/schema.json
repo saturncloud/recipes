@@ -53,15 +53,19 @@
     },
     "extra_packages": {
       "type": "object",
-      "description": "extra packages to install. Not all of these may exist depending on the resource type and if they are needed",
+      "description": "Extra packages to install. Not all of these may exist depending on the resource type and if they are needed",
       "properties": {
         "conda": {
           "type": "object",
-          "description": "Packages to install from conda",
+          "description": "Packages to install with conda",
           "properties": {
             "install": {
               "type": "string",
-              "description": "Packages to install from conda. This will be appended to `conda install `, so each package should be separated by a space."
+              "description": "Packages to install with conda. This will be appended to `conda install `, so each package should be separated by a space."
+            },
+            "environment_yml": {
+              "type": "string",
+              "description": "Contents of an conda environment.yml file describing a conda environment. Such as the output of `conda env export`."
             },
             "use_mamba": {
               "type": "boolean",
@@ -69,19 +73,41 @@
               "default": "true"
             }
           },
-          "required": ["install"],
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["install"]
+            },
+            {
+              "type": "object",
+              "required": ["environment_yml"]
+            }
+          ],        
           "additionalProperties": false
         },
         "pip": {
           "type": "object",
-          "description": "Packages to install from pip",
+          "description": "Packages to install with pip",
           "properties": {
             "install": {
               "type": "string",
-              "description": "Packages to install from pip. This will be appended to `pip install `, so each package should be separated by a space."
+              "description": "Packages to install with pip. This will be appended to `pip install `, so each package should be separated by a space."
+            },
+            "requirements_txt": {
+              "type": "string",
+              "description": "Contents of a pip requirements.txt file describing the packages to install with pip. Such as the output of `pip freeze`."
             }
           },
-          "required": ["install"],
+          "oneOf": [
+            {
+              "type": "object",
+              "required": ["install"]
+            },
+            {
+              "type": "object",
+              "required": ["requirements_txt"]
+            }
+          ],  
           "additionalProperties": false
         },
         "apt": {
