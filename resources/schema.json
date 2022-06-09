@@ -65,7 +65,7 @@
             },
             "environment_yml": {
               "type": "string",
-              "description": "Contents of an conda environment.yml file describing a conda environment. Such as the output of `conda env export`."
+              "description": "[FUTURE RELEASE] Contents of an conda environment.yml file describing a conda environment. Such as the output of `conda env export`."
             },
             "use_mamba": {
               "type": "boolean",
@@ -95,7 +95,7 @@
             },
             "requirements_txt": {
               "type": "string",
-              "description": "Contents of a pip requirements.txt file describing the packages to install with pip. Such as the output of `pip freeze`."
+              "description": "[FUTURE RELEASE] Contents of a pip requirements.txt file describing the packages to install with pip. Such as the output of `pip freeze`."
             }
           },
           "oneOf": [

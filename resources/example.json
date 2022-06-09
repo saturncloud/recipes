@@ -3,8 +3,7 @@
   "description": "A demonstration of the saturn.json schema",
   "image_uri": "public.ecr.aws/saturncloud/saturn:2022.04.01",
   "extra_packages": {
-    "conda": {"install": "tensorflow==2.6.0 papermill", "use_mamba": false},
-    "pip": {"requirements_txt": "click\nnumba\n"}
+    "conda": {"install": "tensorflow==2.6.0 papermill", "use_mamba": false}
   },
   "environment_variables": {
     "VAR1": "VALUE1",
@@ -38,5 +37,5 @@
       "reference": "dev"
     }
   ],
-  "schema_version": "2022.07.01"
+  "schema_version": "2022.05.01"
 }
