@@ -20,7 +20,8 @@
       "description": "Who should be allowed to use the image.",
       "enum": [
         "owner",
-        "org"
+        "org",
+        "account"
       ]
     },
     "hardware_type": {

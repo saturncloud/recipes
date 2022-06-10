@@ -1,7 +1,11 @@
 {
   "name": "demo",
   "description": "A demonstration of the saturn.json schema",
-  "image_uri": "public.ecr.aws/saturncloud/saturn:2022.01.06",
+  "image": {
+    "owner": "saturncloud",
+    "name": "saturn",
+    "version": "2022.05.01"
+  },
   "extra_packages": {
     "conda": {"install": "tensorflow==2.6.0 papermill", "use_mamba": false}
   },
