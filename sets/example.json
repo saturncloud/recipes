@@ -2,7 +2,9 @@
   "images": [
     {
       "name": "saturn",
+      "owner": "saturncloud",
       "hardware_type": "cpu",
+      "visibility": "account",
       "versions": [
         {
           "name": "2021.11.10",
@@ -13,8 +15,10 @@
     },
     {
       "name": "saturn-rstudio",
+      "owner": "saturncloud",
       "supports": ["dask", "rstudio-opensource"],
       "hardware_type": "cpu",
+      "visibility": "account",
       "versions": [
         {
           "name": "2021.11.10",
@@ -32,7 +36,11 @@
       "resource": {
         "schema_version": "2022.06.01",
         "name": "my-rstudio-server",
-        "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
+        "image": {
+          "owner": "saturncloud",
+          "name": "saturn-rstudio",
+          "version": "2021.11.10"
+        },
         "description": "An RStudio server.",
         "rstudio_server": {
           "instance_type": "medium"
@@ -46,7 +54,11 @@
       "schema_version": "2022.06.01",
       "name": "my-jupyter-server",
       "description": "A demonstration of the saturn.json schema",
-      "image_uri": "saturncloud/saturn:2021.11.10",
+      "image": {
+        "owner": "saturncloud",
+        "name": "saturn",
+        "version": "2021.11.10"
+      },
       "extra_packages": {
         "conda": {"install": "tensorflow==2.6.0 papermill"}
       },
@@ -109,7 +121,11 @@
     {
       "schema_version": "2022.06.01",
       "name": "my-rstudio-server",
-      "image_uri": "saturncloud/saturn-rstudio:2021.11.10",
+      "image": {
+        "owner": "saturncloud",
+        "name": "saturn-rstudio",
+        "version": "2021.11.10"
+      },
       "description": "An RStudio server.",
       "rstudio_server": {
         "instance_type": "medium"
@@ -118,7 +134,11 @@
     {
       "schema_version": "2022.06.01",
       "name": "my-dashboard",
-      "image_uri": "saturncloud/saturn:2021.11.10",
+      "image": {
+        "owner": "saturncloud",
+        "name": "saturn",
+        "version": "2021.11.10"
+      },
       "description": "A dashboard deployment.",
       "deployment": {
         "instance_type": "medium",
@@ -129,7 +149,11 @@
     {
       "schema_version": "2022.06.01",
       "name": "a-scheduled-job",
-      "image_uri": "saturncloud/saturn:2021.11.10",
+      "image": {
+        "owner": "saturncloud",
+        "name": "saturn",
+        "version": "2021.11.10"
+      },
       "description": "A job with a schedule.",
       "environment_variables": {
         "FOO": "bar",
