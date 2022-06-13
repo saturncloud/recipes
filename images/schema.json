@@ -20,7 +20,8 @@
       "description": "Who should be allowed to use the image.",
       "enum": [
         "owner",
-        "org"
+        "org",
+        "account"
       ]
     },
     "hardware_type": {
@@ -115,7 +116,7 @@
       ]
     },
     "schema_version": {
-      "const": "2022.05.01",
+      "const": "2022.06.01",
       "description": "The version of the schema used. Typically associated with a Saturn Cloud version"
     }
   },
