@@ -16,13 +16,9 @@
       "type": "string",
       "description": "Details about the resource, to help distinguish them."
     },
-    "image_uri": {
-      "type": "string",
-      "description": "The URI of the image to use with the resource. The image must exist in the particular Saturn Cloud installation for the resource to work (either Hosted or a particular Enterprise installation)"
-    },
     "image": {
       "type": "object",
-      "description": "[FUTURE RELEASE] The image to use with the resource. The image must exist in the particular Saturn Cloud installation for the resource to work (either Hosted or a particular Enterprise installation)",
+      "description": "The image to use with the resource. The image must exist in the particular Saturn Cloud installation for the resource to work (either Hosted or a particular Enterprise installation)",
       "properties": {
         "owner": {
           "type": "string",
@@ -31,12 +27,12 @@
         "name": {
           "type": "string",
           "description": "The name of the image.",
-          "pattern": "^[-a-zA-Z0-9]+$"
+          "pattern": "^[-a-zA-Z0-9\\.]+$"
         },
         "version": {
           "type": "string",
           "description": "The version of the image.",
-          "pattern": "^[-a-zA-Z0-9]+$"
+          "pattern": "^[-a-zA-Z0-9\\.]+$"
         }
       },
       "additionalProperties": false,
@@ -418,7 +414,7 @@
       ]
     },
     "schema_version": {
-      "const": "2022.05.01",
+      "const": "2022.06.01",
       "description": "The version of the recipe schema used. Typically the same as the Saturn Cloud version used when creating the recipe."
     },
     "visibility": {
@@ -434,17 +430,8 @@
   "additionalProperties": false,
   "required": [
     "name",
+    "image",
     "schema_version"
-  ],
-  "oneOf": [
-    {
-      "type": "object",
-      "required": ["image"]
-    },
-    {
-      "type": "object",
-      "required": ["image_uri"]
-    }
   ],
   "anyOf": [
     {"required": ["jupyter_server"]},
