@@ -18,7 +18,8 @@
     "instance_type": "xlarge",
     "start_ssh": true,
     "disk_space": "10Gi",
-    "auto_shutoff": "1 hour"
+    "auto_shutoff": "1 hour",
+    "start_dind": false
   },
   "dask_cluster": {
     "num_workers": 3,
