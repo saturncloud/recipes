@@ -232,7 +232,8 @@
         "start_ssh": { "$ref": "#/$defs/start_ssh" },
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
-        "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" }
+        "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
+        "start_dind": { "$ref": "#/$defs/start_dind" }
       },
       "additionalProperties": false
     },
@@ -242,7 +243,9 @@
         "instance_type": { "$ref": "#/$defs/instance_type" },
         "start_ssh": { "$ref": "#/$defs/start_ssh" },
         "disk_space": { "$ref": "#/$defs/disk_space" },
-        "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" }
+        "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
+        "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
+        "start_dind": { "$ref": "#/$defs/start_dind" }
       },
       "additionalProperties": false
     },
@@ -461,6 +464,11 @@
     "use_spot_instance": {
       "type": "boolean",
       "description": "Whether the server should use a spot instance",
+      "default": false
+    },
+    "start_dind": {
+      "type": "boolean",
+      "description": "Whether Docker support should be enabled",
       "default": false
     },
     "schedule": {
