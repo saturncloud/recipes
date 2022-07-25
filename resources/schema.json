@@ -233,7 +233,8 @@
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
         "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
-        "start_dind": { "$ref": "#/$defs/start_dind" }
+        "start_dind": { "$ref": "#/$defs/start_dind" },
+        "subdomain": { "$ref": "#/$defs/subdomain" }
       },
       "additionalProperties": false
     },
@@ -245,7 +246,9 @@
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
         "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
-        "start_dind": { "$ref": "#/$defs/start_dind" }
+        "start_dind": { "$ref": "#/$defs/start_dind" },
+        "subdomain": { "$ref": "#/$defs/subdomain" }
+
       },
       "additionalProperties": false
     },
@@ -285,19 +288,20 @@
           "description": "How many instance to run at the same time.",
           "default": 1
         },
+        "start_ssh": { "$ref": "#/$defs/start_ssh" },
+        "subdomain": { "$ref": "#/$defs/subdomain" },
         "public": {
           "type": "boolean",
           "description": "Whether to allow unauthenticated access to the deployment.",
           "default": "false"
-        },
-        "start_ssh": { "$ref": "#/$defs/start_ssh" }
+        }
       },
       "additionalProperties": false,
       "required": ["instance_type", "command"]
     },
     "environment_variables": {
       "type": "object",
-      "description": "Environmental variables to include with the object. Each key-value pair must be the name of the variable and the value (both strings)",
+      "description": "Environment variables to include with the object. Each key-value pair must be the name of the variable and the value (both strings)",
       "additionalProperties": {"type": "string"}
     },
     "git_repositories": {
@@ -470,6 +474,10 @@
       "type": "boolean",
       "description": "Whether Docker support should be enabled",
       "default": false
+    },
+    "subdomain": {
+      "type": "string",
+      "description": "Start of the URL used to access the running resource. Must be unique within installation. Defaults to a combination of owner name and ID."
     },
     "schedule": {
       "type": ["string", "null"],
