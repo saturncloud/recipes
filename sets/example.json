@@ -11,7 +11,7 @@
           "image_uri": "saturncloud/saturn:2021.11.10"
         }
       ],
-      "schema_version": "2022.06.01"
+      "schema_version": "2022.08.01"
     },
     {
       "name": "saturn-rstudio",
@@ -25,7 +25,7 @@
           "image_uri": "saturncloud/saturn-rstudio:2021.11.10"
         }
       ],
-      "schema_version": "2022.06.01"
+      "schema_version": "2022.08.01"
     }
   ],
   "templates": [
@@ -34,7 +34,7 @@
       "weight": 100,
       "thumbnail_image_url": "https://saturn-public-assets.s3.us-east-2.amazonaws.com/example-thumbnails/rstudio.png",
       "resource": {
-        "schema_version": "2022.06.01",
+        "schema_version": "2022.08.01",
         "name": "my-rstudio-server",
         "image": {
           "owner": "saturncloud",
@@ -46,12 +46,12 @@
           "instance_type": "medium"
         }
       },
-      "schema_version": "2022.06.01"
+      "schema_version": "2022.08.01"
     }
   ],
   "resources": [
     {
-      "schema_version": "2022.06.01",
+      "schema_version": "2022.08.01",
       "name": "my-jupyter-server",
       "description": "A demonstration of the saturn.json schema",
       "image": {
@@ -119,7 +119,7 @@
       ]
     },
     {
-      "schema_version": "2022.06.01",
+      "schema_version": "2022.08.01",
       "name": "my-rstudio-server",
       "image": {
         "owner": "saturncloud",
@@ -132,7 +132,7 @@
       }
     },
     {
-      "schema_version": "2022.06.01",
+      "schema_version": "2022.08.01",
       "name": "my-dashboard",
       "image": {
         "owner": "saturncloud",
@@ -147,7 +147,7 @@
       }
     },
     {
-      "schema_version": "2022.06.01",
+      "schema_version": "2022.08.01",
       "name": "a-scheduled-job",
       "image": {
         "owner": "saturncloud",
@@ -174,5 +174,5 @@
       }
     }
   ],
-  "schema_version": "2022.06.01"
+  "schema_version": "2022.08.01"
 }

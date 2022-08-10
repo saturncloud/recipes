@@ -22,5 +22,5 @@
       "image_uri": "772275760547.dkr.ecr.us-west-2.amazonaws.com/saturn-tensorflow-384"
     }
   ],
-  "schema_version": "2022.06.01"
+  "schema_version": "2022.08.01"
 }
