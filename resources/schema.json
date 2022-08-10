@@ -233,6 +233,7 @@
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
         "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
+        "self_destruct": { "$ref": "#/$defs/self_destruct" },
         "start_dind": { "$ref": "#/$defs/start_dind" },
         "subdomain": { "$ref": "#/$defs/subdomain" }
       },
@@ -246,9 +247,9 @@
         "disk_space": { "$ref": "#/$defs/disk_space" },
         "auto_shutoff": { "$ref": "#/$defs/auto_shutoff" },
         "use_spot_instance": { "$ref": "#/$defs/use_spot_instance" },
+        "self_destruct": { "$ref": "#/$defs/self_destruct" },
         "start_dind": { "$ref": "#/$defs/start_dind" },
         "subdomain": { "$ref": "#/$defs/subdomain" }
-
       },
       "additionalProperties": false
     },
@@ -421,7 +422,7 @@
       ]
     },
     "schema_version": {
-      "const": "2022.06.01",
+      "const": "2022.08.01",
       "description": "The version of the recipe schema used. Typically the same as the Saturn Cloud version used when creating the recipe."
     },
     "visibility": {
@@ -468,6 +469,11 @@
     "use_spot_instance": {
       "type": "boolean",
       "description": "Whether the server should use a spot instance",
+      "default": false
+    },
+    "self_destruct": {
+      "type": "boolean",
+      "description": "Whether to delete the resource when it is stopped",
       "default": false
     },
     "start_dind": {
